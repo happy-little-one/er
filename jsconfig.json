@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "lib/*":["src/lib/*"],
+      "pages/*":["src/pages/*"],
+      "er/*":["src/module/er/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/index.d.ts", "src/**/*.js"]
+}

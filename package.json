@@ -1,0 +1,15 @@
+{
+  "name": "er",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  },
+  "dependencies": {
+    "@emotion/css": "latest",
+    "lit-html": "latest",
+    "ulid": "^2.3.0"
+  }
+}
