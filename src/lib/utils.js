@@ -26,3 +26,17 @@ export function fix_to(n, target) {
 export function tiny_id() {
   return Math.random().toString(32).slice(2)
 }
+
+export function obs(obj) {
+  return new Proxy(obj, {
+    get(target, key) {
+      const value = Reflect.get(target, key)
+      return typeof value === 'object' ? obs(value) : value
+    },
+    set(target, key, value) {
+      Reflect.set(target, key, value)
+      __RENDER__()
+      return true
+    },
+  })
+}

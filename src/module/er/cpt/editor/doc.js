@@ -2,7 +2,7 @@ import { css } from '@emotion/css'
 import icon from 'lib/cpt/icon'
 import { drag } from 'lib/utils'
 
-import { resize_doc } from 'er/app'
+import { resize_doc, set_doc } from 'er/app'
 
 function start_resize(e) {
   drag(e, [e => e.preventDefault(), e => resize_doc(e.movementX, e.movementY)])
@@ -48,6 +48,7 @@ export default ({ text, width, height }) => {
         })}
         .value=${text}
         placeholder="any thing you want to discrible about this model, support markdown"
+        @input=${e => set_doc(e.target.value.trim())}
       ></textarea>
 
       <button

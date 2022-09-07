@@ -16,7 +16,6 @@ function on_mouse_down(e) {
 }
 
 function on_drop(e) {
-  console.log(0)
   e.preventDefault()
   app.add_node(e.clientX, e.clientY)
 }

@@ -6,14 +6,14 @@ export function grab(x, y) {
   const { translate } = store
   translate.x += x
   translate.y += y
-
-  r()
 }
 
 export function scroll(y) {
   store.translate.y += y
+}
 
-  r()
+export function set_doc(text) {
+  store.doc.text = text
 }
 
 export function add_node(left, top) {
@@ -23,19 +23,15 @@ export function add_node(left, top) {
   const node = mod.node.create(x, y)
 
   store.map[node.id] = node
-
-  r()
 }
 
 export function move_node(id, mx, my) {
   const node = store.map[id]
   node.x += mx
   node.y += my
-
-  r()
 }
 
-export function move_attr_up(node_id, index) {
+export function move_attr_up(node_id, index, key) {
   const node = store.map[node_id]
   const { attrs } = node
 
@@ -43,8 +39,6 @@ export function move_attr_up(node_id, index) {
     const attr1 = attrs[index - 1]
     const attr2 = attrs[index]
     attrs.splice(index - 1, 2, attr2, attr1)
-
-    r()
 
     document.getElementById(attr2.id).focus()
   }
@@ -59,8 +53,6 @@ export function move_attr_down(node_id, index) {
     const attr2 = attrs[index + 1]
     attrs.splice(index, 2, attr2, attr1)
 
-    r()
-
     document.getElementById(attr1.id).focus()
   }
 }
@@ -69,28 +61,22 @@ export function add_attr(id) {
   const { map } = store
   const node = map[id]
 
+  const edges = Object.values(map).filter(it => it.id?.startsWith('edge'))
+  const bottom_edges = mod.node.get_direction_edges(node, edges, 'bottom')
+
   const attr = mod.node.create_attr()
   node.attrs.push(attr)
   node.height += 32
-
-  const edges = Object.values(map).filter(it => it.id?.startsWith('edge'))
-  const bottom_edges = mod.node.get_direction_edges(node, edges, 'bottom')
 
   bottom_edges.forEach(it => {
     if (it.source.id === id) it.source.pos[1] = node.height
     else it.target.pos[1] = node.height
   })
-
-  r()
 }
 
 export function del_attr(id, index) {
   const { map } = store
   const node = map[id]
-
-  node.attrs.splice(index, 1)
-  node.height -= 32
-  const bottom = node.height - 12
 
   const edges = Object.values(map).filter(it => it.id?.startsWith('edge'))
   const bottom_edges = mod.node.get_direction_edges(node, edges, 'bottom')
@@ -98,9 +84,13 @@ export function del_attr(id, index) {
   const left_edges = mod.node.get_direction_edges(node, edges, 'left')
   const horizontal_edges = right_edges.concat(left_edges)
 
+  node.attrs.splice(index, 1)
+  node.height -= 32
+  const bottom = node.height - 12
+
   bottom_edges.forEach(it => {
-    if (it.source.id === id) it.source.pos[1] = bottom
-    else it.target.pos[1] = bottom
+    if (it.source.id === id) it.source.pos[1] = node.height
+    else it.target.pos[1] = node.height
   })
 
   horizontal_edges.forEach(it => {
@@ -110,8 +100,16 @@ export function del_attr(id, index) {
       if (it.target.pos[1] > bottom) it.target.pos[1] = bottom
     }
   })
+}
 
-  r()
+export function set_attr_name(node_id, index, name) {
+  const node = store.map[node_id]
+  node.attrs[index].name = name
+}
+
+export function set_attr_type(node_id, index, type) {
+  const node = store.map[node_id]
+  node.attrs[index].type = type
 }
 
 export function fix_node(id) {
@@ -119,8 +117,6 @@ export function fix_node(id) {
   const { x, y } = node
   node.x = fix_to(x, 20)
   node.y = fix_to(y, 20)
-
-  r()
 }
 
 let connecting_source_id
@@ -128,14 +124,10 @@ export const connect = {
   start(source_id, x, y) {
     connecting_source_id = source_id
     store.connector = [x, y, x, y]
-
-    r()
   },
   connecting(x, y) {
     store.connector[2] = x
     store.connector[3] = y
-
-    r()
   },
   end(target_id) {
     if (
@@ -153,7 +145,6 @@ export const connect = {
 
     store.connector = [0, 0, 0, 0]
     connecting_source_id = undefined
-    r()
   },
 }
 
@@ -169,15 +160,11 @@ export function adujst_pos(id, { mx, my }, key) {
   if (is_between(newx, [0, 220]) && is_between(newy, [0, height])) {
     edge[key].pos = [newx, newy]
   }
-
-  r()
 }
 
 export function adujst_offset(id, offset) {
   const edge = store.map[id]
   edge.offset += offset
-
-  r()
 }
 
 export function resize_doc(x, y) {
@@ -185,6 +172,4 @@ export function resize_doc(x, y) {
   const { width, height } = doc
   doc.width = width - x > 150 ? width - x : 150
   doc.height = height - y > 32 ? height - y : 32
-
-  r()
 }

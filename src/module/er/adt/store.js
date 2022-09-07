@@ -1,4 +1,5 @@
 import { get_d_and_lines } from 'er/mod/edge'
+import { obs } from 'lib/utils'
 
 const store = {
   id: undefined,
@@ -37,8 +38,6 @@ const store = {
   },
 }
 
-export default store
-
 export const directive = {
   nodes: store =>
     Object.values(store.map).filter(it => it?.id.startsWith('node')),
@@ -57,3 +56,5 @@ export const directive = {
         return { id, type, d, lines, marker }
       }),
 }
+
+export default obs(store)

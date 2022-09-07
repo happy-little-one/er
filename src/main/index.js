@@ -6,7 +6,7 @@ import store from 'er/adt/store'
 import app from './app'
 
 window.html = html
-window.r = () => render(app(store), document.body)
+window.__RENDER__ = () => render(app(store), document.body)
 
 render(app(store), document.body)
 
