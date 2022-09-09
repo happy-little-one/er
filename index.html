@@ -2,16 +2,60 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-  <title>ER</title>
-  <script type="module" src="/src/main/index.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <script src="/src/pages/home/index.js" type="module"></script>
+  <title>Pureer-pure, simple, beautiful, E-R diagram tool</title>
 </head>
 
 <body>
+  <header class="header">
+    <h1 class="header__title">Pureer</h1>
+    <nav class="header__nav">
+      <a href="javascript:void">signin</a>
+      <a href="javascript:void">signup</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="topic">
+      <section class="container topic__body">
+        <h2 class="topic__title">Pure, Simple, Beautiful, E-R diagram Tool</h2>
+        <p class="topic__content">
+          with pureer you won't be disturbed by anything, just focus on data modeling
+        </p>
+        <button class="topic__btn">start to use now</button>
+      </section>
+    </div>
+
+    <section class="container detail">
+      <section class="detail__item">
+        <h3 class="detail__title">Pure</h3>
+        <p class="detail__content">
+          Pureer is just a drawing tool, does not bind any database, you can focus on data modeling totally,
+          data modeling should be isolated with specific database, you can think database later.
+        </p>
+      </section>
+      <section class="detail__item">
+        <h3 class="detail__title">Simple</h3>
+        <p class="detail__content">
+          I hate cumbersome and roundabout, both the ui and interaction are kept minimal, almost no toolbars or
+          keyboard shortcuts to remember.
+        </p>
+      </section>
+      <section class="detail__item">
+        <h3 class="detail__title">Beautiful</h3>
+        <p class="detail__content">
+          The model diagram is the most important part of your application, it should be succinct and beautiful.
+          pureer has well designed shadows and rounded corners.
+        </p>
+      </section>
+    </section>
+  </main>
 
 </body>
 

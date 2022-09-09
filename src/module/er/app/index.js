@@ -1,6 +1,7 @@
 import store from 'er/adt/store'
 import * as mod from 'er/mod'
 import { fix_to, is_between } from 'lib/utils'
+import { render } from 'lit-html'
 
 export function grab(x, y) {
   const { translate } = store
