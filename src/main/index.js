@@ -1,14 +1,12 @@
 import { injectGlobal } from '@emotion/css'
 import { html, render } from 'lit-html'
 
-import store from 'er/adt/store'
-
 import app from './app'
 
 window.html = html
-window.__RENDER__ = () => render(app(store), document.body)
+window.__RENDER__ = () => render(app(), document.body)
 
-render(app(store), document.body)
+render(app(), document.body)
 
 injectGlobal/* css */ `
   :root {
@@ -25,7 +23,7 @@ injectGlobal/* css */ `
     
     --border: #d9d9d9;
     --bg: #f5f5f5;
-    --stroke: #8c8c8c;
+    --stroke: #aaa;
 
     --radius: 4px;
 
@@ -33,6 +31,8 @@ injectGlobal/* css */ `
       0 3px 6px -4px rgba(0, 0, 0, 0.12), 
       0 6px 16px 0 rgba(0, 0, 0, 0.08),
       0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+    --inline-shadow: 0 2px #0000000b;
   }
 
   *, ::before, ::after {
@@ -46,7 +46,6 @@ injectGlobal/* css */ `
 
   body {
     margin: 0;
-    font-family: "Fira Code";
     color: var(--text);
     overflow: hidden;
   }
@@ -74,5 +73,9 @@ injectGlobal/* css */ `
     background: transparent;
     color: inherit;
     cursor: pointer;
+  }
+
+  a {
+    color: var(--link);
   }
 `

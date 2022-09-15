@@ -4,7 +4,8 @@
     "paths": {
       "lib/*":["src/lib/*"],
       "pages/*":["src/pages/*"],
-      "er/*":["src/module/er/*"]
+      "er/*":["src/module/er/*"],
+      "auth/*":["src/module/auth/*"]
     }
   },
   "exclude": ["node_modules", "dist"],

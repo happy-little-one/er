@@ -6,6 +6,7 @@ export default {
       lib: resolve('src/lib'),
       pages: resolve('src/pages'),
       er: resolve('src/module/er'),
+      auth: resolve('src/module/auth'),
     },
   },
 }

@@ -1,3 +1,4 @@
 import editor from 'er/cpt/editor'
+import login from 'pages/login'
 
-export default editor
+export default login
